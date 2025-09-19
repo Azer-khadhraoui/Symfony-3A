@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello Symfony{% endblock %}
+
+{% block body %}
+<div class="example-wrapper">
+    <h1>🎉 {{ message }}</h1>
+    
+    <div class="welcome-box">
+        <p>Félicitations ! Vous avez créé votre premier contrôleur Symfony.</p>
+        
+        {% if name != 'Développeur' %}
+            <p class="personal-greeting">Salut <strong>{{ name }}</strong> ! 👋</p>
+        {% endif %}
+        
+        <div class="info-section">
+            <h3>Ce que vous venez d'apprendre :</h3>
+            <ul>
+                <li>✅ Créer un contrôleur avec des routes</li>
+                <li>✅ Utiliser des templates Twig</li>
+                <li>✅ Passer des variables du contrôleur au template</li>
+                <li>✅ Utiliser des paramètres dynamiques dans les URLs</li>
+            </ul>
+        </div>
+        
+        <div class="next-steps">
+            <h3>Prochaines étapes :</h3>
+            <p>Essayez ces URLs :</p>
+            <ul>
+                <li><code>/hello</code> - Page de bienvenue générale</li>
+                <li><code>/hello/votre-nom</code> - Remplacez "votre-nom" par votre prénom</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<style>
+    .example-wrapper {
+        margin: 2rem auto;
+        max-width: 800px;
+        padding: 2rem;
+        font-family: Arial, sans-serif;
+    }
+    
+    h1 {
+        color: #2c5282;
+        text-align: center;
+        margin-bottom: 2rem;
+        font-size: 2.5rem;
+    }
+    
+    .welcome-box {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    
+    .personal-greeting {
+        background: rgba(255,255,255,0.2);
+        padding: 1rem;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 1.2rem;
+        margin: 1rem 0;
+    }
+    
+    .info-section, .next-steps {
+        background: rgba(255,255,255,0.1);
+        padding: 1.5rem;
+        border-radius: 10px;
+        margin: 1rem 0;
+    }
+    
+    .info-section h3, .next-steps h3 {
+        margin-top: 0;
+        color: #ffd700;
+    }
+    
+    ul {
+        margin: 1rem 0;
+    }
+    
+    li {
+        margin: 0.5rem 0;
+    }
+    
+    code {
+        background: rgba(0,0,0,0.3);
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        font-family: 'Courier New', monospace;
+    }
+</style>
+{% endblock %}
