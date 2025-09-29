@@ -18,7 +18,7 @@ class HelloController extends AbstractController
     }
 
     #[Route('/hello/{name}', name: 'app_hello_name')]
-    public function hello(string $name = 'Monde'): Response
+    public function hello(string $name): Response
     {
         return $this->render('hello/index.html.twig', [
             'message' => "Bonjour $name !",
