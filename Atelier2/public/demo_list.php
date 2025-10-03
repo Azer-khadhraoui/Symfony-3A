@@ -128,7 +128,7 @@ foreach ($authors as $author) {
                         <div class="author-name"><?php echo strtoupper(htmlspecialchars($author['username'])); ?></div>
                         <div class="author-email"><?php echo htmlspecialchars(trim($author['email'])); ?></div>
                         <div class="author-books">Nombre de livres : <?php echo $author['nb_books']; ?></div>
-                        <a href="/author-details/<?php echo $author['id']; ?>" class="details-link">Détails</a>
+                        <a href="/authors/details/<?php echo $author['id']; ?>" class="details-link">Détails</a>
                     </div>
                 <?php endforeach; ?>
             </div>

@@ -42,7 +42,7 @@ class AuthorController extends AbstractController
     }
 
     /**
-     * @Route("/author/details/{id}", name="author_details")
+     * @Route("/authors/details/{id}", name="author_details", requirements={"id"="\d+"})
      */
     public function authorDetails(int $id): Response
     {

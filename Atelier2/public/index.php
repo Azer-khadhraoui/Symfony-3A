@@ -66,6 +66,11 @@ switch (true) {
         include 'demo_list.php';
         break;
 
+    case preg_match('/^\/authors\/details\/(\d+)$/', $path, $matches):
+        $authorId = (int)$matches[1];
+        include 'demo_author_details.php';
+        break;
+
     default:
         http_response_code(404);
         echo '<h1>Page non trouvée</h1><p><a href="/">Retour à l\'accueil</a></p>';
