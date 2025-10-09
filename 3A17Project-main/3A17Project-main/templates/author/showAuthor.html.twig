@@ -1,0 +1,8 @@
+<div>
+	<h2>Détails de l'auteur</h2>
+	<p><strong>ID:</strong> {{ auth.id }}</p>
+	<p><strong>Nom d'utilisateur:</strong> {{ auth.username }}</p>
+	<p><strong>Email:</strong> {{ auth.email }}</p>
+</div>
+
+<a href="{{ path('authors_from_db') }}">Retour à la liste</a>
