@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Author;
+use App\Form\AuthorType;
 use App\Repository\AuthorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -113,5 +115,54 @@ final class AuthorController extends AbstractController
         return $this->render('author/list.html.twig', [
             'authors' => $authors,
         ]);
+    }
+
+    #[Route('/author/new', name: 'author_new')]
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $author = new Author();
+        $form = $this->createForm(AuthorType::class, $author);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($author);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Auteur ajouté avec succès !');
+            return $this->redirectToRoute('list_authors');
+        }
+
+        return $this->render('author/new.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/author/edit/{id}', name: 'author_edit')]
+    public function edit(Request $request, Author $author, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(AuthorType::class, $author);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Auteur modifié avec succès !');
+            return $this->redirectToRoute('list_authors');
+        }
+
+        return $this->render('author/edit.html.twig', [
+            'form' => $form->createView(),
+            'author' => $author,
+        ]);
+    }
+
+    #[Route('/author/delete/{id}', name: 'author_delete')]
+    public function delete(Author $author, EntityManagerInterface $entityManager): Response
+    {
+        $entityManager->remove($author);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Auteur supprimé avec succès !');
+        return $this->redirectToRoute('list_authors');
     }
 }

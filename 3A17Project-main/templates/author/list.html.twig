@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des auteurs{% endblock %}
+
+{% block body %}
+<div class="container">
+	<h2>Liste des auteurs</h2>
+
+	<div class="mb-3">
+		<a href="{{ path('author_new') }}" class="btn btn-success">Ajouter un nouvel auteur</a>
+	</div>
+
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success">{{ message }}</div>
+	{% endfor %}
+
+	{% if authors is empty or authors is not defined %}
+		<h3>Aucun auteur trouvé</h3>
+	{% else %}
+		<div>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Nom d'utilisateur</th>
+						<th>Email</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for author in authors %}
+						<tr>
+							<td>{{ author.id }}</td>
+							<td>{{ author.username | upper }}</td>
+							<td>{{ author.email }}</td>
+							<td>
+								<a href="{{ path('author_detail', {'id': author.id}) }}" class="btn btn-info btn-sm">Détails</a>
+								<a href="{{ path('author_edit', {'id': author.id}) }}" class="btn btn-warning btn-sm">Edit</a>
+								<a href="{{ path('author_delete', {'id': author.id}) }}" class="btn btn-danger btn-sm" 
+								   onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet auteur ?')">Delete</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<p><strong>Total :</strong> {{ authors | length }} auteur(s) enregistré(s)</p>
+		</div>
+	{% endif %}
+</div>
+{% endblock %}

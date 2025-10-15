@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un auteur{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Ajouter un nouvel auteur</h1>
+
+        {{ form_start(form) }}
+            <div class="mb-3">
+                {{ form_label(form.username) }}
+                {{ form_widget(form.username) }}
+                {{ form_errors(form.username) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email) }}
+                {{ form_errors(form.email) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_widget(form.submit) }}
+                <a href="{{ path('list_authors') }}" class="btn btn-secondary ms-2">Annuler</a>
+            </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
