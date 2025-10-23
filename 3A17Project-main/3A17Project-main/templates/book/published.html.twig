@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+{% block title %}Published Books{% endblock %}
+{% block body %}
+<div class="container">
+    <h1>Published Books</h1>
+
+    {% if books is empty %}
+        <p>No Books found</p>
+    {% else %}
+        <p>
+            <strong>Published:</strong> {{ publishedCount }} |
+            <strong>Unpublished:</strong> {{ unpublishedCount }}
+        </p>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Category</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                    <tr>
+                        <td>{{ book.id }}</td>
+                        <td>{{ book.title }}</td>
+                        <td>{{ book.author ? book.author.username : '-' }}</td>
+                        <td>{{ book.category }}</td>
+                        <td>
+                            <a href="{{ path('book_show', {'id': book.id}) }}" class="btn btn-secondary btn-sm">Show</a>
+                            <a href="{{ path('book_edit', {'id': book.id}) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="{{ path('book_delete', {'id': book.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Delete this book?')">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</div>
+{% endblock %}

@@ -165,4 +165,25 @@ final class AuthorController extends AbstractController
         $this->addFlash('success', 'Auteur supprimé avec succès !');
         return $this->redirectToRoute('list_authors');
     }
+
+    #[Route('/author/edit-static/{id}', name: 'author_edit_static')]
+    public function editStatic(int $id, AuthorRepository $repo, EntityManagerInterface $em): Response
+    {
+        $author = $repo->find($id);
+        if (!$author) {
+            throw $this->createNotFoundException('Auteur introuvable');
+        }
+
+        // Modification en dur
+        $author->setUsername('Nom Modifié');
+        $author->setEmail('modifie@example.com');
+
+        // Pas besoin de persist() pour un entity déjà managé
+        $em->flush();
+
+        $this->addFlash('success', 'Auteur modifié (valeurs statiques) !');
+        return $this->redirectToRoute('authors'); // Remplace par le nom de ta route de liste si différent
+    }
+
+
 }

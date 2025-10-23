@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block title %}Edit Book{% endblock %}
+{% block body %}
+<div class="container">
+    <h1>Edit Book: {{ book.title }}</h1>
+    {{ form_start(form) }}
+        <div class="mb-3">
+            {{ form_row(form.title) }}
+        </div>
+        <div class="mb-3">
+            {{ form_row(form.category) }}
+        </div>
+        <div class="mb-3">
+            {{ form_row(form.author) }}
+        </div>
+        <div class="mb-3">
+            {{ form_row(form.published) }}
+        </div>
+        <div class="mb-3">
+            {{ form_row(form.submit, {'label': 'Update'}) }}
+            <a href="{{ path('book_index') }}" class="btn btn-secondary ms-2">Cancel</a>
+        </div>
+    {{ form_end(form) }}
+</div>
+{% endblock %}
